@@ -1,0 +1,22 @@
+version: "3"
+services:
+ app:
+  build:
+   context: ./
+   dockerfile: .docker/dockerfile_app
+  volumes:
+   - ./:/app
+  networks:
+   - default 
+ 
+ app_nginx:
+   build:
+    context: ./
+    dockerfile: .docker/dockerfile_nginx
+   volumes:
+    - ./:/var/www
+   ports:
+    - "8000:80"
+   links:
+    - app   
+      
